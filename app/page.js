@@ -86,14 +86,7 @@ export default function HomePage() {
                 <span style={{ fontFamily: MONO, fontSize: 11, fontWeight: 800, color: d.color }}>{d.key}</span>
                 <span style={{ fontSize: 13, fontWeight: 700 }}>{d.name}</span>
               </div>
-              <div style={{ fontSize: 12, color: C.dim, lineHeight: 1.5, marginBottom: 8 }}>{d.desc}</div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span style={{ fontFamily: MONO, fontSize: 9, color: C.muted }}>{d.lo}</span>
-                <span style={{ fontFamily: MONO, fontSize: 9, color: C.muted }}>{d.hi}</span>
-              </div>
-              <div style={{ height: 3, background: C.border, borderRadius: 2, marginTop: 4 }}>
-                <div style={{ height: "100%", width: "60%", background: d.color, borderRadius: 2, opacity: 0.5 }} />
-              </div>
+              <div style={{ fontSize: 12, color: C.dim, lineHeight: 1.5 }}>{d.desc}</div>
             </div>
           ))}
         </div>
@@ -107,8 +100,8 @@ export default function HomePage() {
         </div>
         {[
           { n: "01", t: "Take the Assessment", d: "70 questions across 6 sections. No trading knowledge needed — we measure who you are, not what you know." },
-          { n: "02", t: "Get Your Profile", d: "See your 9-dimension radar chart and discover your trader archetype — free, instantly." },
-          { n: "03", t: "Unlock Your Report", d: "Full analysis with strategy alignment, risk prescriptions, tension analysis, and your personal Trader Operating Manual." },
+          { n: "02", t: "Discover Your Archetype", d: "See which of 20 trader archetypes matches your psychological wiring — instantly, for free." },
+          { n: "03", t: "Unlock Your Full Report", d: "Get your complete 9-dimension breakdown, strategy alignment, risk prescriptions, and personalized Trader Operating Manual." },
           { n: "04", t: "Trade Your Wiring", d: "Stop fighting your psychology. Use your profile to choose the right timeframe, sizing, and strategy for your nature." },
         ].map((step, i) => (
           <div key={i} style={{

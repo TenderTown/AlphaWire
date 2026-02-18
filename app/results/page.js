@@ -48,6 +48,8 @@ export default function ResultsPage() {
         cta={{ href: "/", label: "HOME" }}
       />
       <div style={{ maxWidth: 700, margin: "0 auto", padding: "36px 24px 80px", position: "relative", zIndex: 5 }}>
+
+        {/* Archetype reveal — name only */}
         <div style={{ textAlign: "center", marginBottom: 32, animation: "fadeUp 0.6s ease both" }}>
           <div style={{ fontFamily: MONO, fontSize: 10, color: C.dim, letterSpacing: 2, marginBottom: 10 }}>
             YOUR ALPHAWIRE PROFILE
@@ -56,7 +58,13 @@ export default function ResultsPage() {
           <h1 style={{ fontSize: 36, fontWeight: 900, letterSpacing: "-1px", color: arch.color }}>
             {arch.name}
           </h1>
+          <p style={{ fontSize: 13, color: C.dim, marginTop: 8, maxWidth: 400, margin: "8px auto 0" }}>
+            Your profile has been calculated across all 9 dimensions.
+            Unlock your full report to see what it means for your trading.
+          </p>
         </div>
+
+        {/* LOCKED Radar Chart */}
         <div style={{
           display: "flex", justifyContent: "center", marginBottom: 32,
           animation: "fadeUp 0.6s 0.15s ease both",
@@ -65,14 +73,38 @@ export default function ResultsPage() {
             background: C.bgCard, borderRadius: 14,
             border: `1px solid ${C.border}`, padding: 24,
             display: "inline-flex", flexDirection: "column", alignItems: "center",
+            position: "relative", overflow: "hidden",
           }}>
             <div style={{ fontFamily: MONO, fontSize: 10, fontWeight: 700, color: C.dim, letterSpacing: 1.5, marginBottom: 12 }}>
               YOUR 9-DIMENSION MAP
             </div>
-            <Radar scores={scores} size={280} />
+            {/* Blurred radar */}
+            <div style={{ filter: "blur(12px)", opacity: 0.4, pointerEvents: "none" }}>
+              <Radar scores={scores} size={280} />
+            </div>
+            {/* Lock overlay */}
+            <div style={{
+              position: "absolute", inset: 0,
+              display: "flex", flexDirection: "column",
+              alignItems: "center", justifyContent: "center",
+              background: `radial-gradient(ellipse at center, ${C.bg}90 0%, transparent 70%)`,
+              zIndex: 2,
+            }}>
+              <div style={{ fontSize: 32, marginBottom: 8 }}>🔒</div>
+              <div style={{ fontFamily: MONO, fontSize: 12, fontWeight: 700, color: C.accent, letterSpacing: 1 }}>
+                UNLOCK YOUR FULL PROFILE
+              </div>
+              <div style={{ fontFamily: MONO, fontSize: 10, color: C.dim, marginTop: 4 }}>
+                Scores calculated — purchase to reveal
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* What's in the report */}
         <div style={{ animation: "fadeUp 0.6s 0.3s ease both" }}>
+
+          {/* Locked dimension scores */}
           <div style={{
             background: C.bgCard, borderRadius: 12, border: `1px solid ${C.border}`,
             padding: 20, marginBottom: 16, position: "relative", overflow: "hidden",
@@ -98,6 +130,8 @@ export default function ResultsPage() {
               UNLOCK FULL SCORES
             </div>
           </div>
+
+          {/* Locked feature cards */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 24 }}>
             {[
               { t: "Profile Description", d: "What your archetype means, your natural trading style, edge, and blind spots", i: "📋" },
@@ -120,6 +154,8 @@ export default function ResultsPage() {
               </div>
             ))}
           </div>
+
+          {/* CTA — purchase section */}
           <div style={{
             background: `linear-gradient(135deg, ${C.bgCard}, ${C.accent}08)`,
             borderRadius: 14, border: `1px solid ${C.accent}30`, padding: 32, textAlign: "center",
@@ -162,9 +198,11 @@ export default function ResultsPage() {
               Instant delivery · Pine Script v5 · Not financial advice
             </p>
           </div>
+
+          {/* Share on X */}
           <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
             <ShareOnXButton
-              text={`I'm "${arch.name}" — just mapped my trading psychology across 9 dimensions on AlphaWire. Free assessment, no email needed.`}
+              text={`I just discovered I'm "${arch.name}" — mapped my trading psychology across 9 dimensions on AlphaWire. What's your archetype?`}
               url="https://alpha-wire.vercel.app"
             />
           </div>

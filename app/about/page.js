@@ -57,9 +57,7 @@ export default function AboutPage() {
             and personality — characteristics that develop in childhood and remain remarkably stable
             throughout life. We do not measure trading skill, market knowledge, or experience level.
           </p>
-        </Section>
-        <Section title="THE NINE DIMENSIONS">
-          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {DIMS.map(d => (
               <div key={d.key} style={{
                 display: "flex", gap: 12, padding: "12px 14px",
@@ -72,38 +70,24 @@ export default function AboutPage() {
                 <div>
                   <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 2 }}>{d.name}</div>
                   <div style={{ fontSize: 12, color: C.dim, lineHeight: 1.5 }}>
-                    <strong style={{ color: C.text }}>Measures:</strong> {d.desc}.{" "}
-                    <strong style={{ color: C.text }}>Scale:</strong> {d.lo} (1) — {d.hi} (10)
+                    {d.desc}
                   </div>
                 </div>
               </div>
             ))}
           </div>
         </Section>
-        <Section title="ASSESSMENT STRUCTURE">
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            {[
-              { n: "1", t: "Word Selection", w: "15%", d: "Choose 10-15 personality words that describe you." },
-              { n: "2", t: "Counter-Profile", w: "10%", d: "Choose 8-12 words least like you." },
-              { n: "3", t: "Behavioral Patterns", w: "30%", d: "31 scenario questions measuring real-world behavioral tendencies." },
-              { n: "4", t: "Forced Choice Pairs", w: "15%", d: "16 binary either/or choices that force prioritization." },
-              { n: "5", t: "Spectrum Self-Rating", w: "10%", d: "9 slider scales, one per dimension." },
-              { n: "6", t: "Ideal Trader Profile", w: "20%", d: "Rate the ideal trader on the same 9 scales. Gap analysis corrects for aspiration bias." },
-            ].map((s, i) => (
-              <div key={i} style={{
-                display: "flex", gap: 12, padding: "10px 12px",
-                background: C.bgCard, borderRadius: 8, border: `1px solid ${C.border}`,
-              }}>
-                <div style={{ fontFamily: MONO, fontSize: 16, fontWeight: 800, color: C.accent, opacity: 0.4, minWidth: 24, textAlign: "center" }}>{s.n}</div>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 2 }}>
-                    {s.t} <span style={{ fontFamily: MONO, fontSize: 10, color: C.dim, fontWeight: 500 }}>({s.w})</span>
-                  </div>
-                  <div style={{ fontSize: 12, color: C.dim, lineHeight: 1.5 }}>{s.d}</div>
-                </div>
-              </div>
-            ))}
-          </div>
+        <Section title="HOW IT WORKS">
+          <p>
+            The assessment takes approximately 12 minutes and uses multiple question formats to
+            triangulate your true behavioral tendencies — minimizing the ability to "game"
+            the results or answer aspirationally.
+          </p>
+          <p>
+            Your responses are scored across all nine dimensions to produce a unique profile.
+            This profile is then mapped to one of 20 trader archetypes, each with specific
+            strategy, risk management, and development recommendations.
+          </p>
         </Section>
         <Section title="VALIDATION & ETHICS">
           <div style={{
@@ -122,7 +106,6 @@ export default function AboutPage() {
           </Btn>
         </div>
       </div>
-      {/* EMAIL CAPTURE */}
       <div style={{ maxWidth: 500, margin: "0 auto", padding: "20px 24px 60px", position: "relative", zIndex: 5 }}>
         <EmailCapture context="about" />
       </div>
