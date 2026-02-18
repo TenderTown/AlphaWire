@@ -82,7 +82,6 @@ export default function HomePage() {
               border: `1px solid ${C.border}`, transition: "border-color 0.2s",
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                <span style={{ fontSize: 18 }}>{d.icon}</span>
                 <span style={{ fontFamily: MONO, fontSize: 11, fontWeight: 800, color: d.color }}>{d.key}</span>
                 <span style={{ fontSize: 13, fontWeight: 700 }}>{d.name}</span>
               </div>
@@ -129,7 +128,6 @@ export default function HomePage() {
               padding: "10px 16px", background: C.bgCard, borderRadius: 20,
               border: `1px solid ${C.border}`, display: "flex", alignItems: "center", gap: 6,
             }}>
-              <span style={{ fontSize: 14 }}>{a.icon}</span>
               <span style={{ fontSize: 12, fontWeight: 600, color: a.color }}>{a.name}</span>
             </div>
           ))}

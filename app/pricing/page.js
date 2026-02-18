@@ -3,7 +3,11 @@ import { C, MONO, SANS } from "../../lib/constants";
 import { Nav, Btn, PageWrapper, EmailCapture, Footer } from "../../components/ui";
 
 function Check() {
-  return <span style={{ color: C.accent, marginRight: 6, fontSize: 13 }}>✓</span>;
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 6, flexShrink: 0, marginTop: 1 }}>
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
 }
 
 function Tier({ badge, name, price, desc, features, cta, href, highlight }) {
@@ -83,8 +87,8 @@ export default function PricingPage() {
             desc="Take the full 70-question assessment and discover your trader archetype."
             features={[
               "Complete 6-section assessment",
-              "9-dimension radar chart",
               "Archetype identification",
+              "Blurred radar chart preview",
               "Shareable results",
             ]}
             cta="TAKE THE TEST"

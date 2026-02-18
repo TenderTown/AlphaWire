@@ -97,7 +97,7 @@ export default function AssessmentPage() {
   if (section === 0) return (
     <Shell title="Word Selection" subtitle="Select 10-15 words that MOST naturally describe you — not who you want to be, but who you actually are.">
       <p style={{ fontFamily: MONO, fontSize: 11, color: wordsSelected.size >= 10 ? C.accent : C.dim, marginBottom: 16 }}>
-        {wordsSelected.size} selected {wordsSelected.size < 10 ? `(need ${10 - wordsSelected.size} more)` : "✓"}
+        {wordsSelected.size} selected {wordsSelected.size < 10 ? `(need ${10 - wordsSelected.size} more)` : ""}
       </p>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
         {WORDS_MOST.map((w, i) => {
@@ -123,7 +123,7 @@ export default function AssessmentPage() {
   if (section === 1) return (
     <Shell title="Counter-Profile" subtitle="Select 8-12 words that LEAST describe you — traits that feel most foreign to your nature.">
       <p style={{ fontFamily: MONO, fontSize: 11, color: wordsLeast.size >= 8 ? C.accent : C.dim, marginBottom: 16 }}>
-        {wordsLeast.size} selected {wordsLeast.size < 8 ? `(need ${8 - wordsLeast.size} more)` : "✓"}
+        {wordsLeast.size} selected {wordsLeast.size < 8 ? `(need ${8 - wordsLeast.size} more)` : ""}
       </p>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
         {WORDS_LEAST.map((w, i) => {

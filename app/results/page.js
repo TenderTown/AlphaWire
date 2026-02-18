@@ -54,7 +54,7 @@ export default function ResultsPage() {
           <div style={{ fontFamily: MONO, fontSize: 10, color: C.dim, letterSpacing: 2, marginBottom: 10 }}>
             YOUR ALPHAWIRE PROFILE
           </div>
-          <div style={{ fontSize: 52, marginBottom: 8 }}>{arch.icon}</div>
+          <div style={{ width: 40, height: 3, background: arch.color, margin: "0 auto 16px", borderRadius: 2 }} />
           <h1 style={{ fontSize: 36, fontWeight: 900, letterSpacing: "-1px", color: arch.color }}>
             {arch.name}
           </h1>
@@ -90,7 +90,10 @@ export default function ResultsPage() {
               background: `radial-gradient(ellipse at center, ${C.bg}90 0%, transparent 70%)`,
               zIndex: 2,
             }}>
-              <div style={{ fontSize: 32, marginBottom: 8 }}>🔒</div>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={C.accent} strokeWidth="1.5" style={{ marginBottom: 8 }}>
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
               <div style={{ fontFamily: MONO, fontSize: 12, fontWeight: 700, color: C.accent, letterSpacing: 1 }}>
                 UNLOCK YOUR FULL PROFILE
               </div>
@@ -117,7 +120,7 @@ export default function ResultsPage() {
               <div key={d.key} style={{ marginBottom: 6 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 2 }}>
                   <span style={{ fontSize: 10, fontWeight: 700, color: d.color, fontFamily: MONO }}>{d.key}</span>
-                  <span style={{ fontSize: 10, color: C.muted, fontFamily: MONO }}>🔒</span>
+                  <span style={{ fontSize: 10, color: C.muted, fontFamily: MONO }}>LOCKED</span>
                 </div>
                 <div style={{ height: 5, background: C.border, borderRadius: 3 }} />
               </div>
@@ -134,23 +137,22 @@ export default function ResultsPage() {
           {/* Locked feature cards */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 24 }}>
             {[
-              { t: "Profile Description", d: "What your archetype means, your natural trading style, edge, and blind spots", i: "📋" },
-              { t: "Dimension Scores", d: "Exact numerical scores across all 9 dimensions with zone classifications", i: "📊" },
-              { t: "Strategy Alignment", d: "Optimal timeframe, position sizing, and strategy type for your profile", i: "🎯" },
-              { t: "Risk Prescription", d: "Personalized risk rules based on your Burnout Risk and Stability scores", i: "🛡️" },
-              { t: "Tension Analysis", d: "Where your dimensions conflict and how to manage the friction", i: "⚡" },
-              { t: "Regime Compatibility", d: "Which market environments favor your profile and when to sit out", i: "🌊" },
-              { t: "Development Protocol", d: "Specific exercises to strengthen your weak dimensions over time", i: "📈" },
-              { t: "Trader Operating Manual", d: "Your personalized rulebook — the document you trade by every day", i: "📖" },
+              { t: "Profile Description", d: "What your archetype means, your natural trading style, edge, and blind spots" },
+              { t: "Dimension Scores", d: "Exact numerical scores across all 9 dimensions with zone classifications" },
+              { t: "Strategy Alignment", d: "Optimal timeframe, position sizing, and strategy type for your profile" },
+              { t: "Risk Prescription", d: "Personalized risk rules based on your Burnout Risk and Stability scores" },
+              { t: "Tension Analysis", d: "Where your dimensions conflict and how to manage the friction" },
+              { t: "Regime Compatibility", d: "Which market environments favor your profile and when to sit out" },
+              { t: "Development Protocol", d: "Specific exercises to strengthen your weak dimensions over time" },
+              { t: "Trader Operating Manual", d: "Your personalized rulebook — the document you trade by every day" },
             ].map((item, i) => (
               <div key={i} style={{
                 padding: 14, background: C.bgCard, borderRadius: 10,
                 border: `1px solid ${C.border}`, position: "relative",
               }}>
-                <div style={{ fontSize: 16, marginBottom: 5 }}>{item.i}</div>
                 <div style={{ fontWeight: 700, fontSize: 12, marginBottom: 3 }}>{item.t}</div>
                 <div style={{ fontSize: 11, color: C.dim, lineHeight: 1.4 }}>{item.d}</div>
-                <div style={{ position: "absolute", top: 8, right: 8, fontSize: 12, opacity: 0.4 }}>🔒</div>
+                <div style={{ position: "absolute", top: 10, right: 10, fontFamily: MONO, fontSize: 8, color: C.muted, letterSpacing: 1 }}>LOCKED</div>
               </div>
             ))}
           </div>

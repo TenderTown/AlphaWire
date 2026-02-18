@@ -64,8 +64,7 @@ export default function AboutPage() {
                 background: C.bgCard, borderRadius: 8, border: `1px solid ${C.border}`,
               }}>
                 <div style={{ minWidth: 38, textAlign: "center" }}>
-                  <span style={{ fontSize: 18 }}>{d.icon}</span>
-                  <div style={{ fontFamily: MONO, fontSize: 10, fontWeight: 800, color: d.color, marginTop: 2 }}>{d.key}</div>
+                  <div style={{ fontFamily: MONO, fontSize: 13, fontWeight: 800, color: d.color, marginTop: 2 }}>{d.key}</div>
                 </div>
                 <div>
                   <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 2 }}>{d.name}</div>

@@ -37,7 +37,7 @@ export default function ArchetypesPage() {
               position: "relative", overflow: "hidden",
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                <span style={{ fontSize: 22 }}>{a.icon}</span>
+                <div style={{ width: 8, height: 8, borderRadius: 4, background: a.color, flexShrink: 0 }} />
                 <span style={{ fontWeight: 700, fontSize: 14, color: a.color }}>{a.name}</span>
               </div>
               <div style={{ fontSize: 12, color: C.dim, lineHeight: 1.4, marginBottom: 12 }}>
@@ -47,7 +47,6 @@ export default function ArchetypesPage() {
                 display: "flex", alignItems: "center", gap: 6,
                 fontFamily: MONO, fontSize: 9, color: C.muted, letterSpacing: 1,
               }}>
-                <span>🔒</span>
                 <span>FULL PROFILE IN REPORT</span>
               </div>
             </div>
@@ -71,18 +70,17 @@ export default function ArchetypesPage() {
             gap: 10, maxWidth: 650, margin: "0 auto 24px", textAlign: "left",
           }}>
             {[
-              { i: "📊", t: "9-Dimension Radar Chart", d: "Your exact scores across every dimension" },
-              { i: "🎯", t: "Strategy Alignment", d: "Optimal timeframe, sizing, and approach" },
-              { i: "⚡", t: "Tension Analysis", d: "Where your dimensions conflict" },
-              { i: "🛡️", t: "Risk Prescription", d: "Personalized rules for your wiring" },
-              { i: "📈", t: "Development Protocol", d: "Exercises to strengthen weak areas" },
-              { i: "📖", t: "Trader Operating Manual", d: "Your personalized rulebook" },
+              { t: "9-Dimension Radar Chart", d: "Your exact scores across every dimension" },
+              { t: "Strategy Alignment", d: "Optimal timeframe, sizing, and approach" },
+              { t: "Tension Analysis", d: "Where your dimensions conflict" },
+              { t: "Risk Prescription", d: "Personalized rules for your wiring" },
+              { t: "Development Protocol", d: "Exercises to strengthen weak areas" },
+              { t: "Trader Operating Manual", d: "Your personalized rulebook" },
             ].map((item, idx) => (
               <div key={idx} style={{
                 padding: 12, background: C.bg + "80", borderRadius: 8,
                 border: `1px solid ${C.border}`,
               }}>
-                <div style={{ fontSize: 16, marginBottom: 4 }}>{item.i}</div>
                 <div style={{ fontWeight: 700, fontSize: 11, marginBottom: 2 }}>{item.t}</div>
                 <div style={{ fontSize: 10, color: C.dim, lineHeight: 1.3 }}>{item.d}</div>
               </div>
