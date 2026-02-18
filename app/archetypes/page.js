@@ -1,7 +1,81 @@
 "use client";
 import { C, MONO, SANS, DIMS, ARCHETYPES } from "../../lib/constants";
-import { Nav, Btn, PageWrapper, Footer } from "../../components/ui";
+import { Nav, Btn, Radar, PageWrapper, Footer } from "../../components/ui";
 import { ARCHETYPE_DETAILS } from "../../lib/archetype-data";
+
+/* Mini radar — no labels, just the shape fingerprint */
+function MiniRadar({ scores, size = 110, color }) {
+  const cx = size / 2, cy = size / 2, r = size * 0.40;
+  const n = DIMS.length;
+  const pt = (i, val) => {
+    const a = -Math.PI / 2 + (2 * Math.PI * i) / n;
+    return [cx + ((val / 10) * r) * Math.cos(a), cy + ((val / 10) * r) * Math.sin(a)];
+  };
+  const dp = DIMS.map((d, i) => pt(i, scores[d.key] || 5));
+  const path = dp.map((p, i) => `${i === 0 ? "M" : "L"}${p[0]},${p[1]}`).join(" ") + "Z";
+  const gid = `mrg-${Math.random().toString(36).slice(2, 8)}`;
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      {[0.5, 1.0].map((l, li) => (
+        <polygon key={li}
+          points={DIMS.map((_, i) => pt(i, l * 10).join(",")).join(" ")}
+          fill="none" stroke={C.border} strokeWidth={li === 1 ? 0.6 : 0.3} opacity={0.4}
+        />
+      ))}
+      {DIMS.map((_, i) => {
+        const [ex, ey] = pt(i, 10);
+        return <line key={i} x1={cx} y1={cy} x2={ex} y2={ey} stroke={C.border} strokeWidth={0.3} opacity={0.2} />;
+      })}
+      <defs>
+        <linearGradient id={gid} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={color || C.accent} stopOpacity={0.3} />
+          <stop offset="100%" stopColor={color || C.cyan} stopOpacity={0.08} />
+        </linearGradient>
+      </defs>
+      <path d={path} fill={`url(#${gid})`} stroke={color || C.accent} strokeWidth={1.5} />
+      {dp.map((p, i) => (
+        <circle key={i} cx={p[0]} cy={p[1]} r={2.5} fill={DIMS[i].color} stroke={C.bg} strokeWidth={1} />
+      ))}
+    </svg>
+  );
+}
+
+function ArchetypeCard({ arch, detail }) {
+  return (
+    <div style={{
+      padding: 20, background: C.bgCard, borderRadius: 14,
+      border: `1px solid ${C.border}`, textAlign: "left",
+      display: "flex", gap: 16, alignItems: "flex-start",
+    }}>
+      <div style={{ flexShrink: 0 }}>
+        <MiniRadar scores={detail.scores} size={110} color={arch.color} />
+      </div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+          <div style={{ width: 8, height: 8, borderRadius: 4, background: arch.color, flexShrink: 0 }} />
+          <span style={{ fontWeight: 700, fontSize: 15, color: arch.color }}>{arch.name}</span>
+        </div>
+        <div style={{ fontSize: 12, color: C.dim, lineHeight: 1.5, marginBottom: 10 }}>
+          {detail.tagline}
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+          <span style={{
+            fontFamily: MONO, fontSize: 9, color: C.text, letterSpacing: 0.5,
+            padding: "3px 8px", background: C.bg, borderRadius: 4, border: `1px solid ${C.border}`,
+          }}>
+            {detail.timeframe}
+          </span>
+          <span style={{
+            fontFamily: MONO, fontSize: 9, color: C.text, letterSpacing: 0.5,
+            padding: "3px 8px", background: C.bg, borderRadius: 4, border: `1px solid ${C.border}`,
+          }}>
+            {detail.sizing}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function ArchetypesPage() {
   return (
@@ -14,7 +88,7 @@ export default function ArchetypesPage() {
         ]}
         cta={{ href: "/assessment", label: "TAKE THE TEST" }}
       />
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: "48px 24px 80px", position: "relative", zIndex: 5 }}>
+      <div style={{ maxWidth: 960, margin: "0 auto", padding: "48px 24px 80px", position: "relative", zIndex: 5 }}>
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <div style={{ fontFamily: MONO, fontSize: 10, color: C.accent, letterSpacing: 2, marginBottom: 10 }}>
             INNATE WIRING PROFILES
@@ -24,32 +98,14 @@ export default function ArchetypesPage() {
           </h1>
           <p style={{ fontSize: 15, color: C.dim, maxWidth: 560, margin: "0 auto", lineHeight: 1.6 }}>
             Every trader maps to one of 20 primary archetypes based on their innate 9-dimension wiring.
-            These aren&apos;t labels you choose — they&apos;re patterns you were born with. Take the assessment to discover yours.
+            These aren&apos;t labels you choose — they&apos;re patterns you were born with.
           </p>
         </div>
 
-        {/* Archetype grid — teaser only */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 12, marginBottom: 40 }}>
+        {/* Archetype grid with radar fingerprints */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(400px, 1fr))", gap: 14, marginBottom: 48 }}>
           {ARCHETYPES.map((a, i) => (
-            <div key={i} style={{
-              padding: 18, background: C.bgCard, borderRadius: 12,
-              border: `1px solid ${C.border}`, textAlign: "left",
-              position: "relative", overflow: "hidden",
-            }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                <div style={{ width: 8, height: 8, borderRadius: 4, background: a.color, flexShrink: 0 }} />
-                <span style={{ fontWeight: 700, fontSize: 14, color: a.color }}>{a.name}</span>
-              </div>
-              <div style={{ fontSize: 12, color: C.dim, lineHeight: 1.4, marginBottom: 12 }}>
-                {ARCHETYPE_DETAILS[i].tagline}
-              </div>
-              <div style={{
-                display: "flex", alignItems: "center", gap: 6,
-                fontFamily: MONO, fontSize: 9, color: C.muted, letterSpacing: 1,
-              }}>
-                <span>FULL WIRING ANALYSIS IN REPORT</span>
-              </div>
-            </div>
+            <ArchetypeCard key={i} arch={a} detail={ARCHETYPE_DETAILS[i]} />
           ))}
         </div>
 
