@@ -17,14 +17,14 @@ export default function ArchetypesPage() {
       <div style={{ maxWidth: 900, margin: "0 auto", padding: "48px 24px 80px", position: "relative", zIndex: 5 }}>
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <div style={{ fontFamily: MONO, fontSize: 10, color: C.accent, letterSpacing: 2, marginBottom: 10 }}>
-            PROFILE MAPPING
+            INNATE WIRING PROFILES
           </div>
           <h1 style={{ fontSize: 36, fontWeight: 900, letterSpacing: "-1px", lineHeight: 1.1, marginBottom: 12 }}>
             The 20 <span style={{ color: C.accent }}>Trader Archetypes</span>
           </h1>
           <p style={{ fontSize: 15, color: C.dim, maxWidth: 560, margin: "0 auto", lineHeight: 1.6 }}>
-            Every trader maps to one of 20 primary archetypes based on their 9-dimension profile.
-            Take the assessment to discover yours — along with your full profile analysis.
+            Every trader maps to one of 20 primary archetypes based on their innate 9-dimension wiring.
+            These aren&apos;t labels you choose — they&apos;re patterns you were born with. Take the assessment to discover yours.
           </p>
         </div>
 
@@ -47,7 +47,7 @@ export default function ArchetypesPage() {
                 display: "flex", alignItems: "center", gap: 6,
                 fontFamily: MONO, fontSize: 9, color: C.muted, letterSpacing: 1,
               }}>
-                <span>FULL PROFILE IN REPORT</span>
+                <span>FULL WIRING ANALYSIS IN REPORT</span>
               </div>
             </div>
           ))}
@@ -63,19 +63,19 @@ export default function ArchetypesPage() {
             WHAT YOUR REPORT UNLOCKS
           </div>
           <h2 style={{ fontSize: 22, fontWeight: 800, marginBottom: 16 }}>
-            Your Archetype, <span style={{ color: C.accent }}>Fully Decoded</span>
+            Your Wiring, <span style={{ color: C.accent }}>Fully Decoded</span>
           </h2>
           <div style={{
             display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
             gap: 10, maxWidth: 650, margin: "0 auto 24px", textAlign: "left",
           }}>
             {[
-              { t: "9-Dimension Radar Chart", d: "Your exact scores across every dimension" },
-              { t: "Strategy Alignment", d: "Optimal timeframe, sizing, and approach" },
-              { t: "Tension Analysis", d: "Where your dimensions conflict" },
-              { t: "Risk Prescription", d: "Personalized rules for your wiring" },
-              { t: "Development Protocol", d: "Exercises to strengthen weak areas" },
-              { t: "Trader Operating Manual", d: "Your personalized rulebook" },
+              { t: "9-Dimension Wiring Map", d: "Your exact innate scores across every dimension" },
+              { t: "Strategy Alignment", d: "Optimal timeframe, sizing, and approach for your wiring" },
+              { t: "Strain Map", d: "Where you're fighting your innate nature" },
+              { t: "Tension Analysis", d: "Where your hardwired dimensions naturally conflict" },
+              { t: "Risk Prescription", d: "Personalized rules built for your wiring" },
+              { t: "Trader Operating Manual", d: "Your personalized rulebook for the trader you actually are" },
             ].map((item, idx) => (
               <div key={idx} style={{
                 padding: 12, background: C.bg + "80", borderRadius: 8,
@@ -90,7 +90,7 @@ export default function ArchetypesPage() {
 
         <div style={{ textAlign: "center" }}>
           <Btn primary href="/assessment" style={{ fontSize: 15, padding: "16px 48px" }}>
-            DISCOVER YOUR ARCHETYPE
+            MAP YOUR WIRING
           </Btn>
           <p style={{ fontFamily: MONO, fontSize: 10, color: C.muted, marginTop: 10 }}>
             12 minutes · Free assessment · Full report available after

@@ -72,11 +72,11 @@ export default function PricingPage() {
             PRICING
           </div>
           <h1 style={{ fontSize: 36, fontWeight: 900, letterSpacing: "-1px", lineHeight: 1.1, marginBottom: 12 }}>
-            Your Assessment Is <span style={{ color: C.accent }}>Free</span>
+            Map Your Wiring <span style={{ color: C.accent }}>For Free</span>
           </h1>
           <p style={{ fontSize: 15, color: C.dim, maxWidth: 500, margin: "0 auto", lineHeight: 1.6 }}>
-            Take the full assessment and see your archetype at no cost.
-            Unlock detailed analysis when you&apos;re ready.
+            Take the full assessment and discover your innate archetype at no cost.
+            Unlock your complete wiring analysis when you&apos;re ready.
           </p>
         </div>
 
@@ -84,26 +84,28 @@ export default function PricingPage() {
           <Tier
             name="FREE ASSESSMENT"
             price="0"
-            desc="Take the full 70-question assessment and discover your trader archetype."
+            desc="Take the full 70-question assessment and discover your innate trader archetype."
             features={[
               "Complete 6-section assessment",
               "Archetype identification",
-              "Blurred radar chart preview",
+              "Blurred wiring map preview",
+              "Strain detection teaser",
               "Shareable results",
             ]}
-            cta="TAKE THE TEST"
+            cta="MAP YOUR WIRING"
             href="/assessment"
           />
           <Tier
             badge="MOST POPULAR"
             highlight
-            name="FULL PROFILE REPORT"
+            name="FULL WIRING REPORT"
             price="97"
-            desc="Complete analysis of your trading psychology with actionable recommendations."
+            desc="Complete analysis of your innate trading psychology with actionable alignment recommendations."
             features={[
               "Everything in Free, plus:",
-              "Exact numerical dimension scores",
+              "Exact innate dimension scores",
               "Full archetype deep-dive",
+              "Complete Strain Map",
               "Strategy alignment matrix",
               "Risk management prescription",
               "Tension analysis between dimensions",
@@ -116,7 +118,7 @@ export default function PricingPage() {
           <Tier
             name="REPORT + TV INDICATORS"
             price="247"
-            desc="Full report plus custom TradingView indicators calibrated to your exact profile."
+            desc="Full wiring report plus custom TradingView indicators calibrated to your exact innate profile."
             features={[
               "Everything in Full Report, plus:",
               "Profile-calibrated alert system",
@@ -139,11 +141,13 @@ export default function PricingPage() {
             <h2 style={{ fontSize: 24, fontWeight: 800 }}>Common Questions</h2>
           </div>
           {[
-            { q: "How long does the assessment take?", a: "About 12 minutes. 70 questions across 6 sections. No trading knowledge required — we measure psychology, not skill." },
-            { q: "Is the assessment really free?", a: "Yes. You get your full radar chart and archetype name at no cost. The paid report unlocks detailed scores, strategy recommendations, and development protocols." },
-            { q: "What are the TradingView indicators?", a: "Custom Pine Script v5 indicators calibrated to your specific profile — alert thresholds, position sizing, regime detection, and discipline tracking all tuned to your wiring." },
+            { q: "How long does the assessment take?", a: "About 12 minutes. 70 questions across 6 sections. No trading knowledge required — we measure innate psychology, not skill or experience." },
+            { q: "Is the assessment really free?", a: "Yes. You get your archetype name and a strain detection teaser at no cost. The paid report unlocks your exact dimension scores, full Strain Map, strategy alignment, and development protocols." },
+            { q: "What makes this different from a personality quiz?", a: "Alphawire uses multi-format psychometric methodology — word selection, behavioral patterns, forced-choice pairs — specifically weighted to measure innate traits, not aspirational self-image. The scoring is weighted to minimize the formats most vulnerable to bias." },
+            { q: "Will my profile change over time?", a: "Your innate wiring is stable. Core behavioral traits are largely set by early childhood and remain consistent across your lifespan. If you retake the assessment, minor score variations are normal, but your archetype and overall profile should remain consistent." },
+            { q: "What is the Strain Map?", a: "The gap between your innate wiring and the trader you aspire to be. Large gaps mean you're burning energy fighting your own nature — and eventually, under pressure, your wiring wins. The Strain Map shows exactly where this tension exists." },
+            { q: "What are the TradingView indicators?", a: "Custom Pine Script v5 indicators calibrated to your specific innate profile — alert thresholds, position sizing, regime detection, and discipline tracking all tuned to your hardwired tendencies." },
             { q: "Is this financial advice?", a: "No. Alphawire is an educational and self-awareness tool. It does not provide financial advice or trading signals. You are responsible for your own trading decisions." },
-            { q: "Can I retake the assessment?", a: "Yes, as many times as you want. Your profile may shift slightly as you develop, which is why periodic retesting can be valuable." },
           ].map((item, i) => (
             <div key={i} style={{
               padding: "16px 0",

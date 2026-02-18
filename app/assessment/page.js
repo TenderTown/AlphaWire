@@ -5,10 +5,10 @@ import { C, MONO, SANS, DIMS } from "../../lib/constants";
 import { Nav, Btn, PageWrapper } from "../../components/ui";
 import {
   WORDS_MOST, WORDS_LEAST, BEHAVIORAL_QS, PAIRS,
-  SPECTRUMS, IDEAL_SPECTRUMS, calculateScores, matchArchetype,
+  SPECTRUMS, IDEAL_SPECTRUMS, calculateScores, calculateStrain, matchArchetype,
 } from "../../lib/assessment-data";
 
-const SECTION_NAMES = ["Words", "Counter", "Patterns", "Either/Or", "Spectrum", "Ideal"];
+const SECTION_NAMES = ["Words", "Counter", "Patterns", "Either/Or", "Spectrum", "Trader Self"];
 
 export default function AssessmentPage() {
   const router = useRouter();
@@ -41,9 +41,12 @@ export default function AssessmentPage() {
       setSection(section + 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
+      // Calculate innate scores — NO ideal-self contamination
       const scores = calculateScores({ wordsSelected, wordsLeast, behAns, pairAns, specVals, idealVals });
+      const strain = calculateStrain(scores, idealVals);
       const archIdx = matchArchetype(scores);
       sessionStorage.setItem("aw_scores", JSON.stringify(scores));
+      sessionStorage.setItem("aw_strain", JSON.stringify(strain));
       sessionStorage.setItem("aw_arch", String(archIdx));
       router.push("/results");
     }
@@ -95,7 +98,7 @@ export default function AssessmentPage() {
   );
 
   if (section === 0) return (
-    <Shell title="Word Selection" subtitle="Select 10-15 words that MOST naturally describe you — not who you want to be, but who you actually are.">
+    <Shell title="Word Selection" subtitle="Select 10-15 words that MOST naturally describe you — not who you want to be, but who you've always been. Think about how people who know you best would describe you.">
       <p style={{ fontFamily: MONO, fontSize: 11, color: wordsSelected.size >= 10 ? C.accent : C.dim, marginBottom: 16 }}>
         {wordsSelected.size} selected {wordsSelected.size < 10 ? `(need ${10 - wordsSelected.size} more)` : ""}
       </p>
@@ -121,7 +124,7 @@ export default function AssessmentPage() {
   );
 
   if (section === 1) return (
-    <Shell title="Counter-Profile" subtitle="Select 8-12 words that LEAST describe you — traits that feel most foreign to your nature.">
+    <Shell title="Counter-Profile" subtitle="Select 8-12 words that LEAST describe you — traits that have always felt most foreign to your nature.">
       <p style={{ fontFamily: MONO, fontSize: 11, color: wordsLeast.size >= 8 ? C.accent : C.dim, marginBottom: 16 }}>
         {wordsLeast.size} selected {wordsLeast.size < 8 ? `(need ${8 - wordsLeast.size} more)` : ""}
       </p>
@@ -150,7 +153,7 @@ export default function AssessmentPage() {
     const q = BEHAVIORAL_QS[behQ];
     const done = Object.keys(behAns).length;
     return (
-      <Shell title="Behavioral Patterns" subtitle={`Answer based on how you actually behave — not how you think you should. (${done}/${BEHAVIORAL_QS.length})`}>
+      <Shell title="Behavioral Patterns" subtitle={`Answer based on how you've always behaved — not how you think you should. Your first instinct is usually the most accurate. (${done}/${BEHAVIORAL_QS.length})`}>
         <div style={{
           opacity: behFade ? 1 : 0, transform: behFade ? "translateY(0)" : "translateY(8px)",
           transition: "all 0.2s",
@@ -198,7 +201,7 @@ export default function AssessmentPage() {
     const p = PAIRS[pairQ];
     const done = Object.keys(pairAns).length;
     return (
-      <Shell title="Either / Or" subtitle={`Choose the statement that feels MORE true about you. (${done}/${PAIRS.length})`}>
+      <Shell title="Either / Or" subtitle={`Choose the statement that feels MORE true about who you've always been. (${done}/${PAIRS.length})`}>
         <div style={{
           opacity: pairFade ? 1 : 0, transform: pairFade ? "translateY(0)" : "translateY(8px)",
           transition: "all 0.2s",
@@ -240,7 +243,7 @@ export default function AssessmentPage() {
   }
 
   if (section === 4) return (
-    <Shell title="Spectrum" subtitle="Where do you naturally fall on each spectrum? First instinct is most accurate.">
+    <Shell title="Spectrum" subtitle="Where do you naturally fall on each spectrum? Don't overthink it — your first instinct reflects your true wiring.">
       <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
         {SPECTRUMS.map((sp, i) => {
           const dim = DIMS.find(d => d.key === sp.dim);
@@ -267,7 +270,16 @@ export default function AssessmentPage() {
   );
 
   if (section === 5) return (
-    <Shell title="Ideal Trader" subtitle="Forget about yourself. Think about the IDEAL successful trader. Where would THEY fall on each spectrum?">
+    <Shell title="Your Ideal Trader" subtitle="Now forget about yourself. Describe the trader you ASPIRE to be. This won't change your profile — it reveals where you're fighting your own nature.">
+      <div style={{
+        padding: 14, background: C.bgCard, borderRadius: 10,
+        border: `1px solid ${C.accent}30`, marginBottom: 20,
+      }}>
+        <p style={{ fontSize: 12, color: C.dim, lineHeight: 1.5 }}>
+          <strong style={{ color: C.accent }}>Why this matters:</strong> The gap between who you are and who you&apos;re trying to be is where trading mistakes happen.
+          Large gaps mean you&apos;re burning energy fighting your innate wiring — and eventually, your wiring wins.
+        </p>
+      </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
         {IDEAL_SPECTRUMS.map((sp, i) => {
           const dim = DIMS.find(d => d.key === sp.dim);

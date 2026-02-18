@@ -13,13 +13,15 @@ function buildStripeUrl(base, scores, archIdx) {
 export default function ResultsPage() {
   const router = useRouter();
   const [scores, setScores] = useState(null);
+  const [strain, setStrain] = useState(null);
   const [archIdx, setArchIdx] = useState(null);
 
   useEffect(() => {
     try {
       const s = JSON.parse(sessionStorage.getItem("aw_scores"));
+      const st = JSON.parse(sessionStorage.getItem("aw_strain"));
       const a = parseInt(sessionStorage.getItem("aw_arch"));
-      if (s && !isNaN(a)) { setScores(s); setArchIdx(a); }
+      if (s && !isNaN(a)) { setScores(s); setStrain(st); setArchIdx(a); }
       else { router.push("/assessment"); }
     } catch { router.push("/assessment"); }
   }, [router]);
@@ -28,7 +30,7 @@ export default function ResultsPage() {
     return (
       <PageWrapper>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh" }}>
-          <p style={{ fontFamily: MONO, fontSize: 13, color: C.dim }}>Loading your profile...</p>
+          <p style={{ fontFamily: MONO, fontSize: 13, color: C.dim }}>Mapping your wiring...</p>
         </div>
       </PageWrapper>
     );
@@ -37,6 +39,18 @@ export default function ResultsPage() {
   const arch = ARCHETYPES[archIdx];
   const link97 = buildStripeUrl("https://buy.stripe.com/00w14p3Vw38G6rHfu10x201", scores, archIdx);
   const link247 = buildStripeUrl("https://buy.stripe.com/7sY5kF63EbFc6rHdlT0x200", scores, archIdx);
+
+  // Calculate highest strain dimension for teaser
+  let maxStrainDim = null;
+  if (strain) {
+    let maxVal = 0;
+    DIMS.forEach(d => {
+      if ((strain[d.key] || 0) > maxVal) {
+        maxVal = strain[d.key];
+        maxStrainDim = d;
+      }
+    });
+  }
 
   return (
     <PageWrapper>
@@ -52,14 +66,14 @@ export default function ResultsPage() {
         {/* Archetype reveal — name only */}
         <div style={{ textAlign: "center", marginBottom: 32, animation: "fadeUp 0.6s ease both" }}>
           <div style={{ fontFamily: MONO, fontSize: 10, color: C.dim, letterSpacing: 2, marginBottom: 10 }}>
-            YOUR ALPHAWIRE PROFILE
+            YOUR INNATE WIRING PROFILE
           </div>
           <div style={{ width: 40, height: 3, background: arch.color, margin: "0 auto 16px", borderRadius: 2 }} />
           <h1 style={{ fontSize: 36, fontWeight: 900, letterSpacing: "-1px", color: arch.color }}>
             {arch.name}
           </h1>
-          <p style={{ fontSize: 13, color: C.dim, marginTop: 8, maxWidth: 400, margin: "8px auto 0" }}>
-            Your profile has been calculated across all 9 dimensions.
+          <p style={{ fontSize: 13, color: C.dim, marginTop: 8, maxWidth: 440, margin: "8px auto 0" }}>
+            This is who you&apos;ve been since childhood — your hardwired behavioral profile mapped across 9 dimensions.
             Unlock your full report to see what it means for your trading.
           </p>
         </div>
@@ -76,7 +90,7 @@ export default function ResultsPage() {
             position: "relative", overflow: "hidden",
           }}>
             <div style={{ fontFamily: MONO, fontSize: 10, fontWeight: 700, color: C.dim, letterSpacing: 1.5, marginBottom: 12 }}>
-              YOUR 9-DIMENSION MAP
+              YOUR 9-DIMENSION WIRING MAP
             </div>
             {/* Blurred radar */}
             <div style={{ filter: "blur(12px)", opacity: 0.4, pointerEvents: "none" }}>
@@ -95,10 +109,10 @@ export default function ResultsPage() {
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
               <div style={{ fontFamily: MONO, fontSize: 12, fontWeight: 700, color: C.accent, letterSpacing: 1 }}>
-                UNLOCK YOUR FULL PROFILE
+                UNLOCK YOUR INNATE PROFILE
               </div>
               <div style={{ fontFamily: MONO, fontSize: 10, color: C.dim, marginTop: 4 }}>
-                Scores calculated — purchase to reveal
+                Your wiring has been mapped — purchase to reveal
               </div>
             </div>
           </div>
@@ -107,6 +121,22 @@ export default function ResultsPage() {
         {/* What's in the report */}
         <div style={{ animation: "fadeUp 0.6s 0.3s ease both" }}>
 
+          {/* Strain teaser */}
+          {maxStrainDim && strain[maxStrainDim.key] > 2 && (
+            <div style={{
+              padding: 16, background: C.bgCard, borderRadius: 12,
+              border: `1px solid ${C.orange}40`, marginBottom: 16,
+            }}>
+              <div style={{ fontFamily: MONO, fontSize: 10, fontWeight: 700, color: C.orange, letterSpacing: 1.5, marginBottom: 6 }}>
+                STRAIN DETECTED
+              </div>
+              <p style={{ fontSize: 12, color: C.dim, lineHeight: 1.5 }}>
+                Your biggest gap between innate wiring and aspirational self is in <strong style={{ color: maxStrainDim.color }}>{maxStrainDim.name}</strong>.
+                This is where you&apos;re most likely fighting your own nature. Your full report includes a complete Strain Map showing every dimension where you&apos;re burning energy trying to be someone you&apos;re not.
+              </p>
+            </div>
+          )}
+
           {/* Locked dimension scores */}
           <div style={{
             background: C.bgCard, borderRadius: 12, border: `1px solid ${C.border}`,
@@ -114,7 +144,7 @@ export default function ResultsPage() {
           }}>
             <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, transparent 0%, ${C.bg}ee 40%)`, zIndex: 2 }} />
             <div style={{ fontFamily: MONO, fontSize: 10, fontWeight: 700, color: C.dim, letterSpacing: 1.5, marginBottom: 12 }}>
-              DIMENSION SCORES
+              INNATE DIMENSION SCORES
             </div>
             {DIMS.map(d => (
               <div key={d.key} style={{ marginBottom: 6 }}>
@@ -137,14 +167,14 @@ export default function ResultsPage() {
           {/* Locked feature cards */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 24 }}>
             {[
-              { t: "Profile Description", d: "What your archetype means, your natural trading style, edge, and blind spots" },
-              { t: "Dimension Scores", d: "Exact numerical scores across all 9 dimensions with zone classifications" },
-              { t: "Strategy Alignment", d: "Optimal timeframe, position sizing, and strategy type for your profile" },
-              { t: "Risk Prescription", d: "Personalized risk rules based on your Burnout Risk and Stability scores" },
-              { t: "Tension Analysis", d: "Where your dimensions conflict and how to manage the friction" },
-              { t: "Regime Compatibility", d: "Which market environments favor your profile and when to sit out" },
-              { t: "Development Protocol", d: "Specific exercises to strengthen your weak dimensions over time" },
-              { t: "Trader Operating Manual", d: "Your personalized rulebook — the document you trade by every day" },
+              { t: "Innate Profile Analysis", d: "What your hardwired archetype means — your natural trading style, edge, and blind spots" },
+              { t: "9-Dimension Scores", d: "Your exact innate scores across all dimensions — the wiring you've carried since childhood" },
+              { t: "Strain Map", d: "Where you're fighting your nature — the gap between who you are and who you're trying to trade as" },
+              { t: "Strategy Alignment", d: "Optimal timeframe, position sizing, and strategy type matched to your innate wiring" },
+              { t: "Risk Prescription", d: "Personalized risk rules based on your hardwired Burnout Risk and Stability scores" },
+              { t: "Tension Analysis", d: "Where your innate dimensions naturally conflict and how to manage the friction" },
+              { t: "Regime Compatibility", d: "Which market environments align with your wiring and when to sit out" },
+              { t: "Trader Operating Manual", d: "Your personalized rulebook — built for the trader you actually are, not the one you wish you were" },
             ].map((item, i) => (
               <div key={i} style={{
                 padding: 14, background: C.bgCard, borderRadius: 10,
@@ -169,18 +199,18 @@ export default function ResultsPage() {
               Unlock Your Full <span style={{ color: C.accent }}>Alphawire Report</span>
             </h2>
             <p style={{ fontSize: 13, color: C.dim, maxWidth: 420, margin: "0 auto 20px", lineHeight: 1.5 }}>
-              Complete profile analysis, strategy alignment, risk prescriptions, and
-              custom TradingView indicators calibrated to your profile.
+              Complete innate profile analysis, strain map, strategy alignment, risk prescriptions, and
+              custom TradingView indicators calibrated to your hardwired profile.
             </p>
             <div style={{
               display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8,
               maxWidth: 480, margin: "0 auto 20px", textAlign: "left",
             }}>
               {[
-                { n: "Profile-Calibrated Alerts", d: "Entry signals tuned to your risk and conviction" },
-                { n: "Dynamic Position Sizer", d: "Size calc based on your EV, ED and burnout risk" },
-                { n: "Regime Detection Overlay", d: "Highlights markets matching your edge" },
-                { n: "Discipline Scorecard", d: "Real-time rule adherence for your profile" },
+                { n: "Profile-Calibrated Alerts", d: "Entry signals tuned to your innate risk and conviction" },
+                { n: "Dynamic Position Sizer", d: "Size calc based on your hardwired EV, ED, and burnout risk" },
+                { n: "Regime Detection Overlay", d: "Highlights markets matching your natural edge" },
+                { n: "Discipline Scorecard", d: "Real-time rule adherence built for your wiring" },
               ].map((item, i) => (
                 <div key={i} style={{ padding: 10, background: C.bg + "80", borderRadius: 6, border: `1px solid ${C.border}` }}>
                   <div style={{ fontWeight: 700, fontSize: 11, color: C.accent, marginBottom: 2 }}>{item.n}</div>
@@ -204,7 +234,7 @@ export default function ResultsPage() {
           {/* Share on X */}
           <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
             <ShareOnXButton
-              text={`I just discovered I'm "${arch.name}" — mapped my trading psychology across 9 dimensions on AlphaWire. What's your archetype?`}
+              text={`I just discovered I'm "${arch.name}" — mapped my innate trading psychology across 9 dimensions on AlphaWire. What's your wiring?`}
               url="https://alpha-wire.vercel.app"
             />
           </div>

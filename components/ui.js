@@ -313,7 +313,7 @@ export function Footer() {
             </span>
           </div>
           <p style={{ fontFamily: MONO, fontSize: 10, color: C.muted, maxWidth: 280 }}>
-            Psychometric trading assessment. Know your wiring, trade your nature.
+            Innate behavioral assessment for traders. Your wiring is permanent — your strategy should match it.
           </p>
         </div>
         <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>

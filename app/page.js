@@ -28,25 +28,48 @@ export default function HomePage() {
         transition: "all 0.8s ease",
       }}>
         <div style={{ fontFamily: MONO, fontSize: 11, fontWeight: 700, color: C.accent, letterSpacing: 3, marginBottom: 16 }}>
-          PSYCHOMETRIC TRADING ASSESSMENT
+          INNATE BEHAVIORAL ASSESSMENT FOR TRADERS
         </div>
         <h1 style={{ fontSize: 48, fontWeight: 900, letterSpacing: "-2px", lineHeight: 1.05, marginBottom: 20 }}>
           TA is easy.<br />
           <span style={{ color: C.accent }}>Knowing yourself</span> is hard.
         </h1>
-        <p style={{ fontSize: 17, color: C.dim, maxWidth: 520, margin: "0 auto 32px", lineHeight: 1.6 }}>
-          9 psychological dimensions. 20 trader archetypes. One profile built for your exact wiring.
-          Stop fighting your nature — trade with it.
+        <p style={{ fontSize: 17, color: C.dim, maxWidth: 540, margin: "0 auto 32px", lineHeight: 1.6 }}>
+          Your trading psychology was hardwired by age 6. It hasn&apos;t changed since.
+          We measure the 9 innate dimensions that determine how you trade — then
+          align your strategy to the wiring you already have.
         </p>
         <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
           <Btn primary href="/assessment" style={{ fontSize: 15, padding: "16px 48px" }}>
-            TAKE THE FREE ASSESSMENT
+            MAP YOUR WIRING
           </Btn>
           <Btn href="/about">HOW IT WORKS</Btn>
         </div>
         <p style={{ fontFamily: MONO, fontSize: 10, color: C.muted, marginTop: 14 }}>
           Free · 12 minutes · No email required
         </p>
+      </div>
+
+      {/* CORE PHILOSOPHY */}
+      <div style={{
+        maxWidth: 700, margin: "0 auto", padding: "0 24px 48px",
+        position: "relative", zIndex: 5,
+        opacity: visible ? 1 : 0, transition: "opacity 0.8s ease 0.15s",
+      }}>
+        <div style={{
+          background: C.bgCard, borderRadius: 14, border: `1px solid ${C.border}`,
+          padding: 28, textAlign: "center",
+        }}>
+          <div style={{ fontFamily: MONO, fontSize: 10, color: C.accent, letterSpacing: 2, marginBottom: 10 }}>
+            CORE PRINCIPLE
+          </div>
+          <p style={{ fontSize: 15, color: C.dim, lineHeight: 1.7, maxWidth: 560, margin: "0 auto" }}>
+            Your behavioral traits — risk tolerance, emotional reactivity, patience, independence,
+            discipline — are <strong style={{ color: C.text }}>innate and stable across your lifetime</strong>.
+            You can&apos;t train them away. But you can build a trading approach that works
+            <em> with</em> them instead of against them. That&apos;s what Alphawire does.
+          </p>
+        </div>
       </div>
 
       {/* SAMPLE RADAR */}
@@ -60,11 +83,11 @@ export default function HomePage() {
           padding: 28, display: "inline-flex", flexDirection: "column", alignItems: "center",
         }}>
           <div style={{ fontFamily: MONO, fontSize: 10, fontWeight: 700, color: C.dim, letterSpacing: 1.5, marginBottom: 14 }}>
-            SAMPLE PROFILE — THE CONTRARIAN
+            SAMPLE WIRING PROFILE — THE CONTRARIAN
           </div>
           <Radar scores={SAMPLE_SCORES} size={260} />
           <div style={{ fontFamily: MONO, fontSize: 10, color: C.muted, marginTop: 10 }}>
-            Every trader&apos;s profile is unique
+            Every trader&apos;s wiring is unique — no two profiles are the same
           </div>
         </div>
       </div>
@@ -73,7 +96,11 @@ export default function HomePage() {
       <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 24px 60px", position: "relative", zIndex: 5 }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <div style={{ fontFamily: MONO, fontSize: 10, color: C.accent, letterSpacing: 2, marginBottom: 8 }}>WHAT WE MEASURE</div>
-          <h2 style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-1px" }}>9 Dimensions of Trading Psychology</h2>
+          <h2 style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-1px" }}>9 Innate Dimensions of Trading Psychology</h2>
+          <p style={{ fontSize: 14, color: C.dim, maxWidth: 480, margin: "10px auto 0", lineHeight: 1.5 }}>
+            These are traits rooted in temperament — developed in childhood and stable
+            across your entire life. We don&apos;t measure skill, knowledge, or experience.
+          </p>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 10 }}>
           {DIMS.map(d => (
@@ -98,10 +125,10 @@ export default function HomePage() {
           <h2 style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-1px" }}>How It Works</h2>
         </div>
         {[
-          { n: "01", t: "Take the Assessment", d: "70 questions across 6 sections. No trading knowledge needed — we measure who you are, not what you know." },
-          { n: "02", t: "Discover Your Archetype", d: "See which of 20 trader archetypes matches your psychological wiring — instantly, for free." },
-          { n: "03", t: "Unlock Your Full Report", d: "Get your complete 9-dimension breakdown, strategy alignment, risk prescriptions, and personalized Trader Operating Manual." },
-          { n: "04", t: "Trade Your Wiring", d: "Stop fighting your psychology. Use your profile to choose the right timeframe, sizing, and strategy for your nature." },
+          { n: "01", t: "Map Your Wiring", d: "70 questions across 6 sections designed to reveal your innate behavioral traits. No trading knowledge needed — we measure who you are, not what you know." },
+          { n: "02", t: "Discover Your Archetype", d: "See which of 20 trader archetypes matches your hardwired psychological profile — instantly, for free." },
+          { n: "03", t: "See Your Strain Map", d: "The gap between your innate wiring and your aspirational self reveals where you're fighting your own nature — and where trading mistakes originate." },
+          { n: "04", t: "Trade Your Nature", d: "Stop fighting your psychology. Your report aligns timeframe, sizing, strategy, and risk rules to the wiring you were born with." },
         ].map((step, i) => (
           <div key={i} style={{
             display: "flex", gap: 16, padding: "18px 0",
@@ -120,7 +147,7 @@ export default function HomePage() {
       <div style={{ maxWidth: 800, margin: "0 auto", padding: "0 24px 60px", position: "relative", zIndex: 5 }}>
         <div style={{ textAlign: "center", marginBottom: 24 }}>
           <div style={{ fontFamily: MONO, fontSize: 10, color: C.accent, letterSpacing: 2, marginBottom: 8 }}>20 ARCHETYPES</div>
-          <h2 style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-1px" }}>Which One Are You?</h2>
+          <h2 style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-1px" }}>Which One Are You Wired As?</h2>
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
           {ARCHETYPES.map((a, i) => (
